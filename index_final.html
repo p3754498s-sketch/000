@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SECOND VIEW｜第二視角</title>
+  <meta name="description" content="SECOND VIEW — 同一個世界，不同的觀看方式。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_final.css">
+</head>
+<body>
+  <!-- GSAP & Three.js 庫 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <header class="nav">
+    <a class="brand" href="#intro">SECOND VIEW<span>/</span><small>第二視角</small></a>
+    <nav>
+      <a href="#event">01 EVENT<small>同一事件</small></a>
+      <a href="#views">02 VIEWS<small>觀看視角</small></a>
+      <a href="#lab">03 LAB<small>觀看實驗室</small></a>
+      <a href="#test">04 TEST<small>互動測驗</small></a>
+      <a href="#result">05 YOUR VIEW<small>你的視角</small></a>
+      <a href="#merch">06 BEYOND THE VIEW<small>商業周邊</small></a>
+    </nav>
+    <button class="menu-btn" aria-label="menu">MENU<small>選單</small></button>
+  </header>
+
+  <main>
+    <section id="intro" class="hero section-dark">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-grid"></div>
+      <div class="eyebrow">2026 / VISUAL PSYCHOLOGY PROJECT <span>視覺心理研究計畫</span></div>
+      <h1>SECOND<br><span>VIEW</span></h1>
+      <div class="hero-copy">
+        <p>你看到的，<br>真的是全部嗎？</p>
+        <button class="line-btn scroll-btn" data-target="#event">ENTER SECOND VIEW <small>進入第二視角</small> <span>→</span></button>
+      </div>
+      <div class="hero-index">00 — INTRO</div>
+      <div class="hero-coordinate">25°02'N / 121°33'E</div>
+    </section>
+
+    <section id="event" class="event section-light">
+      <div class="section-head">
+        <div><span class="num">01</span><span> SAME EVENT <b>同一事件</b></span></div>
+        <p>同一件事。<small>SAME EVENT</small></p>
+      </div>
+      <div class="event-layout">
+        <div class="event-title">
+          <h2>SAME EVENT<br><em>同一件事。</em></h2>
+          <p>我們先不告訴你發生了什麼。<br>只給你一個事件。<small>We give you only one event.</small></p>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-top"><span>19:42</span><span>●●●</span></div>
+            <div class="chat-label">MESSAGES</div>
+            <div class="bubble sent">你今天還好嗎？</div>
+            <div class="read">已讀 ✓✓</div>
+            <div class="phone-space"></div>
+          </div>
+          <p class="event-caption">READ. NO REPLY.</p>
+        </div>
+      </div>
+      <div class="view-prompt">HOW DO YOU SEE IT?<small>你會怎麼看？</small></div>
+      <div class="view-choices">
+        <button data-view="relation">RELATION<small>關係</small></button>
+        <button data-view="rule">RULE<small>規則</small></button>
+        <button data-view="self">SELF<small>自我</small></button>
+        <button data-view="gaze">GAZE<small>目光</small></button>
+        <button data-view="attention">ATTENTION<small>注意力</small></button>
+        <button data-view="reality">REALITY<small>現實解讀</small></button>
+      </div>
+      <div id="event-reveal" class="event-reveal">
+        <div class="reveal-line"></div>
+        <div class="reveal-content">
+          <span class="reveal-code">VIEWPOINT / <b>RELATION</b></span>
+          <h3>你注意到的是<br><strong>關係。</strong></h3>
+          <p>同一個訊息，在不同的觀看位置裡，可以產生完全不同的意義。</p>
+          <button class="text-link scroll-btn" data-target="#views">EXPLORE SIX VIEWPOINTS →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="views" class="views section-dark">
+      <div class="section-head">
+        <div><span class="num">02</span><span> SIX VIEWPOINTS <b>六種觀看視角</b></span></div>
+        <p>六種觀看切面。<small>SIX VIEWPOINTS</small></p>
+      </div>
+      <div class="views-intro">
+        <h2>人格不是<br><span>全部。</span><small>PERSONALITY IS NOT THE WHOLE.</small></h2>
+        <p>我們將心理學資料轉譯成六種「觀看模式」。<br>不是診斷，而是一次暫時離開自己位置的練習。<small>Not a diagnosis. A temporary shift in viewpoint.</small></p>
+      </div>
+      <div class="view-grid">
+        <article class="view-card" data-theme="relation">
+          <div class="card-symbol relation-symbol"><i></i><i></i></div>
+          <span>01 / 邊緣型</span><h3>RELATION</h3><p>關係</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+        <article class="view-card" data-theme="rule">
+          <div class="card-symbol rule-symbol"></div>
+          <span>02 / 反社會型</span><h3>RULE</h3><p>規則</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+        <article class="view-card" data-theme="self">
+          <div class="card-symbol self-symbol"><i></i></div>
+          <span>03 / 自戀型</span><h3>SELF</h3><p>自我</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+        <article class="view-card" data-theme="gaze">
+          <div class="card-symbol gaze-symbol"><i></i><i></i></div>
+          <span>04 / 逃避型</span><h3>GAZE</h3><p>目光</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+        <article class="view-card" data-theme="attention">
+          <div class="card-symbol attention-symbol"><i></i><i></i><i></i></div>
+          <span>05 / 表演型</span><h3>ATTENTION</h3><p>注意力</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+        <article class="view-card" data-theme="reality">
+          <div class="card-symbol reality-symbol"><i></i><i></i><i></i><i></i></div>
+          <span>06 / 妄想型</span><h3>REALITY</h3><p>現實解讀</p>
+          <button>EXPLORE <small>探索</small> ↗</button>
+        </article>
+      </div>
+      <p class="medical-note">※ 本網站為視覺研究與互動體驗，不提供人格障礙或精神疾病診斷。 <span>VISUAL RESEARCH / NOT A CLINICAL TOOL</span></p>
+    </section>
+
+    <section id="lab" class="lab section-light">
+      <div class="section-head">
+        <div><span class="num">03</span><span> VIEWING LAB <b>觀看實驗室</b></span></div>
+        <p>觀看實驗室。<small>VIEWING LAB</small></p>
+      </div>
+      <div class="lab-shell">
+        <aside class="lab-menu">
+          <button class="active" data-lab="relation">01 / 邊緣型</button>
+          <button data-lab="rule">02 / 反社會型</button>
+          <button data-lab="self">03 / 自戀型</button>
+          <button data-lab="gaze">04 / 逃避型</button>
+          <button data-lab="attention">05 / 表演型</button>
+          <button data-lab="reality">06 / 妄想型</button>
+        </aside>
+        <div class="lab-content">
+          <div class="lab-meta"><span id="lab-code">BPD / BORDERLINE PERSONALITY DISORDER</span><span>01—06</span></div>
+          <h2 id="lab-title">RELATION</h2>
+          <p id="lab-subtitle" class="lab-subtitle">關係</p>
+          <div class="lab-stage">
+            <div class="stage-art" id="stage-art">
+              <div class="person-dot a"></div><div class="person-dot b"></div><div class="stage-line"></div>
+            </div>
+            <div class="stage-copy">
+              <span>HOW THEY SEE <small>他們如何觀看</small></span>
+              <h3 id="lab-headline">當關係成為重要訊號，距離也開始說話。</h3>
+              <p id="lab-desc">這裡不是對人的定義，而是將相關心理特徵轉譯成「觀看焦點」來理解。</p>
+            </div>
+          </div>
+          <div class="notice-miss">
+            <div><span>WHAT THEY NOTICE <small>他們注意到什麼</small></span><strong id="notice">關係、回應、距離、語氣</strong></div>
+            <div><span>WHAT THEY MAY MISS <small>他們可能忽略什麼</small></span><strong id="miss">事件也可能存在其他解釋。</strong></div>
+          </div>
+          <button class="shift-btn" id="shiftBtn">SHIFT YOUR VIEW <small>切換你的視角</small> <span>↗</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="test" class="test section-dark">
+      <div class="section-head">
+        <div><span class="num">04</span><span> SECOND VIEW TEST <b>第二視角測驗</b></span></div>
+        <p>你的觀看傾向。<small>YOUR VIEWING TENDENCY</small></p>
+      </div>
+      <div class="test-wrap">
+        <div class="test-intro" id="testIntro">
+          <span class="big-index">05</span>
+          <h2>你習慣<br><em>注意什麼？</em><small>WHAT DO YOU NOTICE?</small></h2>
+          <p>這不是診斷。<br>這不是人格判定。<br>這是一場關於「你如何觀看」的互動實驗。</p>
+          <button class="line-btn" id="startTest">START TEST <small>開始測驗</small> →</button>
+        </div>
+        <div class="question" id="question">
+          <div class="q-top"><span id="qNum">01 / 05</span><span id="qProgress">●○○○○</span></div>
+          <h3 id="qText"></h3>
+          <div id="answers" class="answers"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="result" class="result section-light">
+      <div class="section-head">
+        <div><span class="num">05</span><span> YOUR SECOND VIEW <b>你的第二視角</b></span></div>
+        <p>重新觀看。<small>LOOK AGAIN</small></p>
+      </div>
+      <div class="result-wrap">
+        <div class="result-main">
+          <span>YOUR PRIMARY VIEWPOINT <small>你的主要觀看傾向</small></span>
+          <h2 id="resultTitle">SELF</h2>
+          <p id="resultChinese">自我</p>
+        </div>
+        <div class="result-bars" id="resultBars"></div>
+        <div class="result-text">
+          <div><span>WHAT YOU NOTICE <small>你容易注意什麼</small></span><p id="resultNotice">你可能比較容易先注意事件如何影響「自己」。</p></div>
+          <div><span>WHAT YOU MAY MISS <small>你可能忽略什麼</small></span><p id="resultMiss">從另一個位置觀看，可能會讓你發現不同的解釋。</p></div>
+        </div>
+        <button class="dark-btn" id="retryTest">TRY ANOTHER VIEW <small>換一個視角再看看</small> →</button>
+      </div>
+    </section>
+
+    <!-- Section 3: 展覽實體周邊與 VIS 系統應用 -->
+    <section id="merch" class="merch-section">
+      <div class="merch-header">
+        <h2 class="merch-subtitle">// PHYSICAL EXTENSION</h2>
+        <h3 class="merch-maintitle">展覽實體周邊與 VIS 系統應用</h3>
+      </div>
+
+      <div class="merch-grid">
+        <!-- 01. 主視覺海報 -->
+        <div class="merch-card" onclick="openMerchModal('01 / VISUAL POSTER', 'SECOND VIEW 主視覺海報', '以「同一事件、不同觀看位置」建立主視覺。黑底維持監控系統語彙，米白作為資訊面，紅／黃／綠只作為視角識別。', '海報.jpg')">
+          <div class="merch-visual">
+            <div class="poster-art"><div class="poster-dot"></div><div class="poster-line"></div></div>
+          </div>
+          <div class="merch-tag">01 / VISUAL POSTER</div>
+          <h5 class="merch-title">SECOND VIEW 主視覺海報</h5>
+          <p class="merch-desc">以「同一事件、不同觀看位置」建立主視覺。黑底維持監控系統語彙，米白作為資訊面，紅／黃／綠只作為視角識別。</p>
+        </div>
+
+        <!-- 02. 六種視角透明入場卡 -->
+        <div class="merch-card" onclick="openMerchModal('02 / EXHIBITION PASS', '六種視角透明入場卡', '把 BPD、ASPD、NPD、AvPD、HPD 與 DELUSION 六個觀看主題濃縮成一張可攜式識別物，對應網站六種互動。', '')">
+          <div class="merch-visual">
+            <div class="ticket-art"><div class="ticket-cut"></div></div>
+          </div>
+          <div class="merch-tag">02 / EXHIBITION PASS</div>
+          <h5 class="merch-title">六種視角透明入場卡</h5>
+          <p class="merch-desc">把 BPD、ASPD、NPD、AvPD、HPD 與 DELUSION 六個觀看主題濃縮成一張可攜式識別物，對應網站六種互動。</p>
+        </div>
+
+        <!-- 03. 第二視角研究專刊 -->
+        <div class="merch-card" onclick="openMerchModal('03 / RESEARCH ZINE', '第二視角研究專刊', '把網站的六種觀看核心、研究脈絡與互動結果延伸成可翻閱的實體出版物，讓數位體驗有完整的畢製輸出。', 'https://via.placeholder.com/800x1000/121215/00FF88?text=ZINE+PREVIEW')">
+          <div class="merch-visual">
+            <div class="zine-art"><div class="z-title">SECOND<br><i>VIEW</i></div><div class="z-circle"></div><div class="z-small">LOOK AGAIN / 再看一次</div></div>
+          </div>
+          <div class="merch-tag">03 / RESEARCH ZINE</div>
+          <h5 class="merch-title">第二視角研究專刊</h5>
+          <p class="merch-desc">把網站的六種觀看核心、研究脈絡與互動結果延伸成可翻閱的實體出版物，讓數位體驗有完整的畢製輸出。</p>
+        </div>
+      </div>
+
+      <!-- 點擊放大查看成果 Modal 彈窗 -->
+      <div id="merch-modal" class="custom-modal">
+        <div class="modal-content">
+          <button onclick="closeMerchModal()" class="modal-close-btn">✕</button>
+          <div id="modal-tag" class="modal-tag-text"></div>
+          <h3 id="modal-title" class="modal-title-text"></h3>
+          <div class="modal-img-container">
+            <img id="modal-img" src="" alt="成果大圖">
+          </div>
+          <p id="modal-desc" class="modal-desc-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="end" class="ending section-dark">
+      <div class="ending-center">
+        <span>SECOND VIEW <small>第二視角</small></span>
+        <h2>THERE IS NO<br><em>SINGLE VIEW.</em></h2>
+        <p>沒有所謂唯一的視角。<small>There is no single way to see the world.</small></p>
+        <small>《第二視角》邀請你暫時離開自己的位置，<br>觀看另一種理解世界的方法。</small>
+      </div>
+      <footer>
+        <span>SECOND VIEW / 2026</span>
+        <span>VISUAL COMMUNICATION DESIGN</span>
+        <a href="#intro">BACK TO TOP ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script_final.js"></script>
+</body>
+</html>

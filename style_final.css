@@ -1,0 +1,1491 @@
+/* ==========================================
+   SECOND VIEW — 8-Bit 像素可愛風 (Pixel Kawaii / Retro Arcade)
+   ========================================== */
+
+* {
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Silkscreen', 'Noto Sans TC', monospace, sans-serif;
+  background: #FFE8F2; /* 像素奶粉紅 */
+  color: #2D1B2D;      /* 深紫黑 */
+  cursor: none;
+}
+
+button, a {
+  font-family: inherit;
+  color: #FF3366;
+}
+
+button {
+  cursor: none;
+}
+
+/* 像素游標 */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #FF3366;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 0px #2D1B2D;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #FF99C8;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  transition: .05s ease;
+}
+
+/* 導覽列 - 像素黑框式 */
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFF0F6;
+  border-bottom: 4px solid #2D1B2D;
+  color: #2D1B2D;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: #2D1B2D;
+}
+
+.brand span {
+  opacity: .8;
+  margin-left: 4px;
+  color: #FF3366;
+}
+
+.nav nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav nav a {
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-decoration: none;
+  color: #2D1B2D;
+  font-weight: 700;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: 0;
+  color: #2D1B2D;
+}
+
+/* 區塊深淺主題設定 */
+.section-dark {
+  background: #2D1B2D;
+  color: #FFF0F6;
+}
+
+.section-light {
+  background: #FFE8F2;
+  color: #2D1B2D;
+}
+
+/* Hero 首頁區塊 */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 16vh 8vw 7vh;
+  background: linear-gradient(135deg, #FFB3D1 0%, #AEE2FF 100%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(45, 27, 45, 0.1) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(45, 27, 45, 0.1) 2px, transparent 2px);
+  background-size: 16px 16px;
+  opacity: .8;
+}
+
+.eyebrow, .hero-index, .hero-coordinate {
+  font-size: 11px;
+  letter-spacing: .1em;
+  position: relative;
+  color: #2D1B2D;
+  font-weight: 700;
+}
+
+/* 文字主標：已調小上方邊距，往上挪動 */
+.hero h1 {
+  position: relative;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(50px, 12vw, 190px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: -86vh 0 0; /* 修改處：從 10vh 往上挪至 2vh */
+  color: #FFEA00;
+  text-shadow: 6px 6px 0px #FF3366, 12px 12px 0px #2D1B2D;
+}
+
+.hero h1 span {
+  margin-left: 8vw;
+  color: #00E5FF !important;
+  text-shadow: 6px 6px 0px #FF3366, 12px 12px 0px #2D1B2D !important;
+}
+
+.hero-copy {
+  position: absolute;
+  right: 8vw;
+  bottom: 10vh;
+  z-index: 2;
+}
+
+.hero-copy p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* 像素風立體按鈕 */
+.line-btn {
+  background: #FFEA00;
+  border: 4px solid #2D1B2D;
+  color: #2D1B2D;
+  padding: 14px 20px;
+  letter-spacing: .08em;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 4px 4px 0px #2D1B2D;
+  transition: all .08s ease;
+}
+
+.line-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #2D1B2D;
+  background: #FF3366;
+  color: #FFF;
+}
+
+.line-btn span {
+  margin-left: 12px;
+}
+
+.hero-index {
+  position: absolute;
+  bottom: 5vh;
+  left: 8vw;
+}
+
+.hero-coordinate {
+  position: absolute;
+  bottom: 5vh;
+  right: 8vw;
+}
+
+.section-head {
+  padding: 100px 7vw 45px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px repeating-linear-gradient(90deg, #2D1B2D, #2D1B2D 8px, transparent 8px, transparent 16px);
+  font-size: 11px;
+  letter-spacing: .08em;
+  font-weight: 700;
+}
+
+.section-head .num {
+  color: #FF3366;
+  margin-right: 14px;
+}
+
+.section-head p {
+  margin: 0;
+}
+
+/* 01 EVENT 區塊 */
+.event {
+  min-height: 100vh;
+}
+
+.event-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+  padding: 80px 10vw 50px;
+  align-items: center;
+}
+
+.event-title h2 {
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: #2D1B2D;
+}
+
+.event-title h2 em {
+  font-style: normal;
+  background: #FFEA00;
+  padding: 2px 10px;
+  border: 4px solid #2D1B2D;
+  box-shadow: 3px 3px 0px #2D1B2D;
+}
+
+.event-title p {
+  margin-top: 35px;
+  line-height: 1.8;
+  color: #523852;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 像素手機外框 */
+.phone-wrap {
+  text-align: center;
+}
+
+.phone {
+  width: min(320px, 75vw);
+  height: 480px;
+  margin: auto;
+  border: 4px solid #2D1B2D;
+  padding: 20px;
+  position: relative;
+  background: #FFF0F6;
+  box-shadow: 6px 6px 0px #FF99C8, 10px 10px 0px #2D1B2D;
+  transition: .3s;
+}
+
+.phone-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.chat-label {
+  font-size: 10px;
+  letter-spacing: .1em;
+  margin-top: 30px;
+  text-align: left;
+  color: #888;
+}
+
+.bubble {
+  margin-top: 60px;
+  background: #FF3366;
+  color: #FFF;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  max-width: 220px;
+  margin-left: auto;
+  border: 3px solid #2D1B2D;
+  box-shadow: 3px 3px 0px #2D1B2D;
+  font-weight: 600;
+}
+
+.read {
+  text-align: right;
+  font-size: 10px;
+  margin-top: 8px;
+  color: #888;
+  font-weight: 700;
+}
+
+.phone-space {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  height: 4px;
+  background: #2D1B2D;
+}
+
+.event-caption {
+  font-size: 11px;
+  letter-spacing: .15em;
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.view-prompt {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .18em;
+  margin-top: 50px;
+  font-weight: 700;
+}
+
+.view-choices {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 24px 6vw;
+}
+
+.view-choices button {
+  background: #FFF;
+  border: 3px solid #2D1B2D;
+  padding: 10px 18px;
+  font-size: 11px;
+  box-shadow: 3px 3px 0px #2D1B2D;
+  transition: .1s;
+  font-weight: 700;
+  color: #2D1B2D;
+}
+
+.view-choices button:hover, .view-choices button.active {
+  background: #00E5FF;
+  color: #2D1B2D;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #2D1B2D;
+}
+
+.event-reveal {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .6s step-end;
+  padding: 0 10vw;
+}
+
+.event-reveal.show {
+  max-height: 450px;
+  padding-top: 40px;
+  padding-bottom: 70px;
+}
+
+.reveal-line {
+  height: 4px;
+  background: #2D1B2D;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.reveal-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 25px;
+}
+
+.reveal-code {
+  font-size: 11px;
+  letter-spacing: .12em;
+  font-weight: 700;
+}
+
+.reveal-content h3 {
+  font-size: clamp(30px, 4vw, 55px);
+  line-height: 1;
+  margin: 0;
+  color: #2D1B2D;
+}
+
+.reveal-content h3 strong {
+  font-weight: 800;
+  color: #FF3366;
+}
+
+.reveal-content p {
+  grid-column: 2;
+  color: #523852;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.text-link {
+  grid-column: 2;
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 0;
+  font-size: 11px;
+  color: #FF3366;
+  font-weight: 700;
+}
+
+/* 02 VIEWS 六種觀看視角 */
+.views {
+  min-height: 100vh;
+  padding-bottom: 90px;
+  background: #2D1B2D;
+  color: #FFF;
+}
+
+.views-intro {
+  padding: 80px 10vw 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+}
+
+.views-intro h2 {
+  font-size: clamp(45px, 7vw, 110px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: 0;
+  color: #FFEA00;
+}
+
+.views-intro h2 span {
+  color: #FF99C8;
+}
+
+.views-intro p {
+  align-self: end;
+  line-height: 1.8;
+  font-size: 14px;
+  color: #E2D5E5;
+}
+
+.view-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 6vw;
+  gap: 20px;
+}
+
+.view-card {
+  min-height: 360px;
+  padding: 28px;
+  background: #452945;
+  border: 4px solid #FFF;
+  position: relative;
+  transition: .1s;
+  box-shadow: 6px 6px 0px #FF3366;
+}
+
+.view-card:hover {
+  background: #FFEA00;
+  color: #2D1B2D;
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #FF3366;
+}
+
+.view-card > span {
+  font-size: 13px;
+  letter-spacing: .08em;
+  opacity: .9;
+  font-weight: 700;
+}
+
+.view-card h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(20px, 2.5vw, 36px);
+  letter-spacing: -0.05em;
+  margin: 80px 0 10px;
+}
+
+.view-card p {
+  font-size: 13px;
+  opacity: .9;
+  font-weight: 600;
+}
+
+.view-card button {
+  position: absolute;
+  bottom: 25px;
+  left: 28px;
+  background: none;
+  border: 0;
+  font-size: 10px;
+  font-weight: 800;
+  color: inherit;
+}
+
+/* 像素風格視角符號 */
+.card-symbol {
+  height: 60px;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  width: 80px;
+}
+
+.relation-symbol i {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  position: absolute;
+  top: 20px;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+.relation-symbol i:first-child { left: 0; }
+.relation-symbol i:last-child { right: 0; }
+.relation-symbol:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background: currentColor;
+  left: 10px;
+  right: 10px;
+  top: 26px;
+}
+
+.rule-symbol {
+  border: 4px solid currentColor;
+  background: repeating-linear-gradient(0deg, transparent 0 6px, currentColor 6px 10px);
+}
+
+.self-symbol {
+  border: 4px solid currentColor;
+}
+
+.self-symbol i {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  left: 26px;
+  top: 16px;
+}
+
+.gaze-symbol i {
+  position: absolute;
+  border: 4px solid currentColor;
+  width: 36px;
+  height: 20px;
+  top: 18px;
+}
+
+.gaze-symbol i:first-child { left: 0; }
+.gaze-symbol i:last-child { right: 0; }
+
+.attention-symbol i {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+}
+
+.attention-symbol i:nth-child(1) { left: 0; top: 20px; }
+.attention-symbol i:nth-child(2) { left: 30px; top: 0px; }
+.attention-symbol i:nth-child(3) { right: 0; top: 30px; }
+
+.reality-symbol i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 3px solid currentColor;
+}
+
+.reality-symbol i:nth-child(1) { left: 5px; top: 8px; }
+.reality-symbol i:nth-child(2) { right: 5px; top: 2px; }
+.reality-symbol i:nth-child(3) { left: 30px; bottom: 2px; }
+.reality-symbol i:nth-child(4) { right: 15px; bottom: 10px; }
+
+.medical-note {
+  font-size: 10px;
+  color: #E2D5E5;
+  margin: 30px 6vw 0;
+  font-weight: 600;
+}
+
+/* 03 LAB 實驗室 */
+.lab {
+  min-height: 100vh;
+  padding-bottom: 90px;
+  background: #FFE8F2;
+}
+
+.lab-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding: 0 30px;
+}
+
+.lab-menu {
+  border-right: 4px repeating-linear-gradient(0deg, #2D1B2D, #2D1B2D 8px, transparent 8px, transparent 16px);
+  padding-right: 30px;
+}
+
+.lab-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid rgba(45, 27, 45, 0.15);
+  padding: 16px 0;
+  font-size: 11px;
+  color: #777;
+  font-weight: 700;
+}
+
+.lab-menu button.active {
+  color: #FF3366;
+  font-weight: 900;
+  border-bottom: 4px solid #FF3366;
+}
+
+.lab-content {
+  padding-left: 60px;
+}
+
+.lab-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #777;
+  font-weight: 700;
+}
+
+.lab-content h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(40px, 7vw, 90px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: 50px 0 0;
+  color: #2D1B2D;
+}
+
+.lab-subtitle {
+  font-size: 15px;
+  margin-top: 15px;
+  color: #FF3366;
+  font-weight: 700;
+}
+
+.lab-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-top: 60px;
+  align-items: center;
+}
+
+.stage-art {
+  height: 280px;
+  background: #FFF0F6;
+  border: 4px solid #2D1B2D;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 6px 6px 0px #2D1B2D;
+}
+
+.person-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #FF3366;
+  border: 3px solid #2D1B2D;
+  top: 50%;
+  transition: .4s step-end;
+}
+
+.person-dot.a { left: 20%; }
+.person-dot.b { right: 20%; }
+
+.stage-line {
+  position: absolute;
+  height: 4px;
+  background: #2D1B2D;
+  left: 20%;
+  right: 20%;
+  top: calc(50% + 8px);
+}
+
+.stage-copy > span, .notice-miss span, .result-text span {
+  font-size: 10px;
+  color: #777;
+  font-weight: 700;
+}
+
+.stage-copy h3 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 15px 0;
+  color: #2D1B2D;
+}
+
+.stage-copy p {
+  font-size: 13px;
+  color: #523852;
+  line-height: 1.8;
+}
+
+.notice-miss {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.notice-miss > div {
+  background: #FFF;
+  border: 3px solid #2D1B2D;
+  padding: 24px;
+  box-shadow: 4px 4px 0px #2D1B2D;
+}
+
+.notice-miss strong {
+  display: block;
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2D1B2D;
+}
+
+.shift-btn {
+  margin-top: 25px;
+  background: #FF3366;
+  color: #FFF;
+  border: 3px solid #2D1B2D;
+  padding: 14px 22px;
+  font-size: 10px;
+  box-shadow: 4px 4px 0px #2D1B2D;
+  font-weight: 700;
+  transition: .1s;
+}
+
+.shift-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #2D1B2D;
+  background: #00E5FF;
+  color: #2D1B2D;
+}
+
+/* 04 TEST 互動測驗 */
+.test {
+  min-height: 100vh;
+  background: #2D1B2D;
+  color: #FFF;
+}
+
+.test-wrap {
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 8vw;
+}
+
+.test-intro {
+  max-width: 600px;
+}
+
+.big-index {
+  font-size: 14px;
+  color: #FF99C8;
+  font-weight: 800;
+}
+
+.test-intro h2 {
+  font-size: clamp(45px, 7vw, 100px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: 40px 0;
+  color: #FFEA00;
+}
+
+.test-intro h2 em {
+  font-style: normal;
+  color: #00E5FF;
+}
+
+.test-intro p {
+  font-size: 14px;
+  color: #E2D5E5;
+  line-height: 1.8;
+  margin-bottom: 35px;
+}
+
+.question {
+  display: none;
+  width: min(850px, 100%);
+}
+
+.q-top {
+  display: flex;
+  justify-content: space-between;
+  color: #FF99C8;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.question h3 {
+  font-size: clamp(24px, 3.5vw, 48px);
+  line-height: 1.2;
+  margin: 45px 0;
+  color: #FFEA00;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.answer {
+  background: #452945;
+  border: 3px solid #FFF;
+  color: #FFF;
+  padding: 20px;
+  text-align: left;
+  min-height: 85px;
+  transition: .1s;
+  font-size: 13px;
+  box-shadow: 4px 4px 0px #FF3366;
+  font-weight: 600;
+}
+
+.answer:hover {
+  background: #FFEA00;
+  color: #2D1B2D;
+  border-color: #2D1B2D;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #FF3366;
+}
+
+/* 05 RESULT 結果 */
+.result {
+  min-height: 100vh;
+  padding-bottom: 100px;
+  background: #FFE8F2;
+}
+
+.result-wrap {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 30px;
+}
+
+.result-main > span {
+  font-size: 11px;
+  color: #777;
+  font-weight: 700;
+}
+
+.result-main h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(50px, 9vw, 130px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: 50px 0 15px;
+  color: #2D1B2D;
+}
+
+.result-main p {
+  font-size: 20px;
+  color: #FF3366;
+  font-weight: 700;
+}
+
+.result-bars {
+  display: grid;
+  gap: 12px;
+  margin: 70px 0;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 50px;
+  align-items: center;
+  gap: 15px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.bar {
+  height: 14px;
+  background: #FFF0F6;
+  border: 3px solid #2D1B2D;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: #FF3366;
+}
+
+.result-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  border-top: 4px repeating-linear-gradient(90deg, #2D1B2D, #2D1B2D 8px, transparent 8px, transparent 16px);
+  padding-top: 30px;
+}
+
+.result-text p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #523852;
+}
+
+.dark-btn {
+  margin-top: 50px;
+  background: #2D1B2D;
+  color: #FFF;
+  border: 3px solid #2D1B2D;
+  padding: 15px 22px;
+  font-size: 10px;
+  box-shadow: 4px 4px 0px #FF3366;
+  font-weight: 700;
+  transition: .1s;
+}
+
+.dark-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #FF3366;
+  background: #FF3366;
+}
+
+/* 06 BEYOND THE VIEW 實體周邊區塊 */
+#merch, section#merch {
+  width: 100% !important;
+  max-width: 100% !important;
+  background-color: #FFB3D1 !important;
+  margin: 0 !important;
+  padding: 70px 0 !important;
+  box-sizing: border-box !important;
+  border-top: 4px solid #2D1B2D !important;
+}
+
+#merch .merch-subtitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  color: #2D1B2D;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+#merch .merch-maintitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #2D1B2D;
+  margin: 0;
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .merch-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.merch-card {
+  background-color: #FFF;
+  border: 4px solid #2D1B2D;
+  padding: 1.25rem;
+  transition: transform 0.1s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 6px 6px 0px #2D1B2D;
+}
+
+.merch-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px #2D1B2D;
+}
+
+.merch-visual {
+  width: 100%;
+  height: 180px;
+  background: #FFF0F6;
+  border: 3px solid #2D1B2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.merch-tag {
+  font-size: 11px;
+  color: #FF3366;
+  margin-bottom: 0.4rem;
+  font-weight: 800;
+}
+
+.merch-title {
+  color: #2D1B2D;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+}
+
+.merch-desc {
+  color: #523852;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Modal 彈窗像素樣式 */
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(45, 27, 45, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.custom-modal.active { display: flex; }
+
+.modal-content {
+  background-color: #FFF;
+  border: 4px solid #2D1B2D;
+  max-width: 620px;
+  width: 100%;
+  padding: 1.75rem;
+  position: relative;
+  box-sizing: border-box;
+  text-align: left;
+  box-shadow: 10px 10px 0px #2D1B2D;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: #FF3366;
+  border: 2px solid #2D1B2D;
+  color: #FFF;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px #2D1B2D;
+}
+
+.modal-tag-text {
+  font-size: 0.75rem;
+  color: #FF3366;
+  margin-bottom: 0.4rem;
+  font-weight: 800;
+}
+
+.modal-title-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #2D1B2D;
+  margin: 0 0 0.8rem 0;
+}
+
+.modal-img-container {
+  width: 100%;
+  background-color: #FFF0F6;
+  border: 3px solid #2D1B2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.modal-img-container img {
+  max-height: 48vh;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.modal-desc-text {
+  color: #523852;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 結尾頁 */
+.ending {
+  height: 100vh;
+  min-height: 650px;
+  position: relative;
+  padding: 80px 7vw 40px;
+  background: #2D1B2D;
+  color: #FFF;
+}
+
+.ending-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%;
+}
+
+.ending-center > span {
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: #FF99C8;
+  font-weight: 700;
+}
+
+.ending-center h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(35px, 6vw, 90px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  margin: 35px 0;
+  color: #FFEA00;
+}
+
+.ending-center h2 em {
+  font-style: normal;
+  color: #00E5FF;
+}
+
+.ending-center p {
+  font-size: 16px;
+}
+
+.ending-center small {
+  display: block;
+  color: #E2D5E5;
+  line-height: 1.8;
+  margin-top: 35px;
+}
+
+footer {
+  position: absolute;
+  left: 7vw;
+  right: 7vw;
+  bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #E2D5E5;
+  font-weight: 600;
+}
+
+footer a {
+  text-decoration: none;
+  color: #FFEA00;
+}
+
+/* 雙語系統導覽與視覺細節修飾 */
+.nav a small, .brand small, .menu-btn small, .eyebrow span, .line-btn small, .section-head b,
+.section-head p small, .view-prompt small, .view-choices button small, .views-intro h2 small,
+.views-intro p small, .view-card button small, .medical-note span, .stage-copy span small,
+.notice-miss span small, .shift-btn small, .test-intro h2 small, .result-main > span small,
+.result-text span small, .dark-btn small, .ending-center > span small, .ending-center p small {
+  display: block;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: inherit;
+  opacity: .8;
+  font-size: .75em;
+  margin-top: 4px;
+}
+
+/* 響應式微調 */
+@media(max-width: 800px) {
+  .nav nav { display: none; }
+  .menu-btn { display: block; background: none; border: 0; color: #2D1B2D; font-size: 11px; }
+  .event-layout, .views-intro, .lab-stage, .result-text { grid-template-columns: 1fr; }
+  .view-grid { grid-template-columns: 1fr; margin: 0 4vw; }
+  .lab-shell { grid-template-columns: 1fr; padding: 0 6vw; }
+  .lab-menu {
+    border-right: 0;
+    border-bottom: 4px repeating-linear-gradient(90deg, #2D1B2D, #2D1B2D 8px, transparent 8px, transparent 16px);
+    padding: 0;
+    margin-bottom: 40px;
+    display: flex;
+    overflow: auto;
+    gap: 15px;
+  }
+  .lab-menu button { min-width: max-content; border: 0; }
+  .answers { grid-template-columns: 1fr; }
+}
+
+/* ==========================================
+   觀看實驗室 (LAB) 圖形與互動補強
+   ========================================== */
+
+/* 舞台容器置中與基礎樣式 */
+.stage-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #FFF0F6;
+  border: 4px solid #2D1B2D;
+  height: 280px;
+  overflow: hidden;
+  box-shadow: 6px 6px 0px #2D1B2D;
+  transition: background-color 0.3s ease;
+}
+
+/* 點擊切換視角 (Shifted) 時的舞台背景變化 */
+.stage-art.shifted {
+  background: #2D1B2D;
+  color: #FFEA00;
+}
+
+.lab-symbol-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lab-symbol {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 點擊按鈕或符號時的脈衝動畫 */
+.lab-pulse {
+  animation: labPulse 0.4s ease-out;
+}
+
+@keyframes labPulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 01. RELATION (關係) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="relation"] .relation-symbol i:first-child {
+  left: 10px;
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="relation"] .relation-symbol i:last-child {
+  right: 10px;
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="relation"].shifted .relation-symbol i:first-child {
+  transform: translateX(-15px);
+  background: #00E5FF;
+}
+.stage-art[data-theme="relation"].shifted .relation-symbol i:last-child {
+  transform: translateX(15px);
+  background: #FF3366;
+}
+
+/* 02. RULE (規則) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="rule"] .rule-symbol {
+  width: 80px;
+  height: 60px;
+  margin: auto;
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="rule"].shifted .rule-symbol {
+  transform: rotate(45deg) scale(0.9);
+  border-color: #00E5FF;
+}
+
+/* 03. SELF (自我) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="self"] .self-symbol {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="self"].shifted .self-symbol {
+  transform: scale(1.3);
+  border-color: #FF3366;
+}
+.stage-art[data-theme="self"].shifted .self-symbol i {
+  background: #FFEA00;
+}
+
+/* 04. GAZE (目光) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="gaze"] .gaze-symbol {
+  width: 90px;
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="gaze"].shifted .gaze-symbol i:first-child {
+  transform: translateY(-10px);
+}
+.stage-art[data-theme="gaze"].shifted .gaze-symbol i:last-child {
+  transform: translateY(10px);
+}
+
+/* 05. ATTENTION (注意力) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="attention"] .attention-symbol {
+  width: 90px;
+}
+.stage-art[data-theme="attention"] .attention-symbol i {
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="attention"].shifted .attention-symbol i:nth-child(1) {
+  transform: translate(-10px, -10px);
+  background: #00E5FF;
+}
+.stage-art[data-theme="attention"].shifted .attention-symbol i:nth-child(2) {
+  transform: scale(1.5);
+  background: #FF3366;
+}
+.stage-art[data-theme="attention"].shifted .attention-symbol i:nth-child(3) {
+  transform: translate(10px, 10px);
+  background: #FFEA00;
+}
+
+/* 06. REALITY (現實解讀) 視覺對應與 Shifted 狀態 */
+.stage-art[data-theme="reality"] .reality-symbol {
+  width: 80px;
+}
+.stage-art[data-theme="reality"] .reality-symbol i {
+  transition: all 0.4s ease;
+}
+.stage-art[data-theme="reality"].shifted .reality-symbol i {
+  border-radius: 50%;
+  border-color: #00E5FF;
+  transform: rotate(180deg);
+}
+
+/* ==========================================
+   POSTER ROLE PALETTE — 只改顏色，不改懸浮例子造型
+   ========================================== */
+.view-card[data-theme="relation"] .card-symbol, .view-card[data-theme="relation"] .card-symbol *, .lab-symbol.relation-symbol, .lab-symbol.relation-symbol * { color:#FF3B30; }
+.view-card[data-theme="rule"] .card-symbol, .view-card[data-theme="rule"] .card-symbol *, .lab-symbol.rule-symbol, .lab-symbol.rule-symbol * { color:#FFD400; }
+.view-card[data-theme="self"] .card-symbol, .view-card[data-theme="self"] .card-symbol *, .lab-symbol.self-symbol, .lab-symbol.self-symbol * { color:#FF8A00; }
+.view-card[data-theme="gaze"] .card-symbol, .view-card[data-theme="gaze"] .card-symbol *, .lab-symbol.gaze-symbol, .lab-symbol.gaze-symbol * { color:#27C93F; }
+.view-card[data-theme="attention"] .card-symbol, .view-card[data-theme="attention"] .card-symbol *, .lab-symbol.attention-symbol, .lab-symbol.attention-symbol * { color:#00A8FF; }
+.view-card[data-theme="reality"] .card-symbol, .view-card[data-theme="reality"] .card-symbol *, .lab-symbol.reality-symbol, .lab-symbol.reality-symbol * { color:#8E5CFF; }
+.stage-art[data-theme="relation"].shifted .relation-symbol i:first-child { background:#FF3B30; }
+.stage-art[data-theme="relation"].shifted .relation-symbol i:last-child { background:#27C93F; }
+.stage-art[data-theme="rule"].shifted .rule-symbol { border-color:#FFD400; }
+.stage-art[data-theme="self"].shifted .self-symbol { border-color:#FF8A00; }
+.stage-art[data-theme="gaze"].shifted .gaze-symbol i { border-color:#27C93F; }
+.stage-art[data-theme="attention"].shifted .attention-symbol i { background:#00A8FF; }
+.stage-art[data-theme="reality"].shifted .reality-symbol i { border-color:#8E5CFF; }
+
+/* ==========================================
+   HERO 封面補足物件量 — 不改原本排版與互動
+   ========================================== */
+/* ==========================================
+   HERO 封面物件調和 — 大、中、小 8-Bit 像素層次
+   ========================================== */
+
+/* 1. 大物件：畫面上方的 Arcade 大型幾何標示框 & 標誌性大星星 (焦點結構) */
+.hero::before {
+  content: "★";
+  font-family: 'Press Start 2P', monospace;
+  font-size: 110px;
+  color: #FFEA00;
+  position: absolute;
+  top: 14%;
+  right: 10%;
+  text-shadow: 6px 6px 0px #FF3366, 12px 12px 0px #2D1B2D;
+  transform: rotate(15deg);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1;
+  animation: pixelFloat 3s ease-in-out infinite alternate;
+}
+
+/* 2. 中物件：像素懸浮視窗 (與網站視覺心理主題呼應) */
+.hero::after {
+  content: "[VIEW: 01]";
+  font-family: 'Silkscreen', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFF;
+  padding: 16px 24px;
+  background: #FF3366;
+  border: 4px solid #2D1B2D;
+  box-shadow: 6px 6px 0px #2D1B2D, 12px 12px 0px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 28%;
+  left: 6%;
+  transform: rotate(-8deg);
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3. 中／小物件群：像素星號、方格點陣與裝飾點綴 (填補版面剩餘留白) */
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  /* 運用 box-shadow 在不同位置點綴像素小幾何塊 */
+  width: 16px;
+  height: 16px;
+  background: #00E5FF;
+  box-shadow: 
+    /* 中物件：右上像素多邊塊與十字 */
+    78vw 38vh 0 8px #FF99C8,
+    78vw 38vh 0 12px #2D1B2D,
+    /* 小物件：散落各處的像素點陣 */
+    12vw 62vh 0 0px #FFEA00,
+    18vw 20vh 0 2px #2D1B2D,
+    48vw 15vh 0 4px #00E5FF,
+    85vw 68vh 0 2px #FF3366,
+    70vw 22vh 0 0px #2D1B2D,
+    35vw 72vh 0 3px #FF99C8;
+  opacity: 0.85;
+}
+
+/* 4. 小物件細節：動態掃描線與裝飾像素條 */
+.hero-grid::after {
+  content: "✦ LOOK AGAIN ✦";
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #2D1B2D;
+  background: #FF99C8;
+  border: 3px solid #2D1B2D;
+  padding: 6px 12px;
+  position: absolute;
+  bottom: 22vh;
+  left: 8vw;
+  box-shadow: 3px 3px 0px #2D1B2D;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 浮動動畫效果 */
+@keyframes pixelFloat {
+  0% { transform: translateY(0px) rotate(15deg); }
+  100% { transform: translateY(-12px) rotate(18deg); }
+}
+
+/* 確保文字與按鈕仍在物件上方 */
+.hero .eyebrow, .hero h1, .hero-copy, .hero-index, .hero-coordinate {
+  z-index: 2;
+}
